@@ -365,6 +365,8 @@ public:
     //! @param c base-10 logarithm of the pressure in Pa
     void update_C(const doublereal* c) {
         double Pr = (2 * c[0] + PrNum_) * PrDen_;
+        if (Pr < -1.0) Pr = -1.0;
+        else if (Pr > 1.0) Pr = 1.0;
         double Cnm1 = 1;
         double Cn = Pr;
         double Cnp1;
@@ -388,6 +390,8 @@ public:
      */
     doublereal updateRC(doublereal logT, doublereal recipT) const {
         double Tr = (2 * recipT + TrNum_) * TrDen_;
+        if (Tr < -1.0) Tr = -1.0;
+        else if (Tr > 1.0) Tr = 1.0;
         double Cnm1 = 1;
         double Cn = Tr;
         double Cnp1;
